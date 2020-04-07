@@ -12,6 +12,9 @@
 typedef enum states {
     LED_ON,
     LED_OFF,
+    READ,
+    WRITE,
+    WAIT,
 } state_t;
 
 //Inputs
@@ -22,6 +25,6 @@ void on(int64_t before);
 void off(int64_t before);
 
 //FSM
-void fire(state_t state, int64_t before);
+void fire(state_t state, int64_t before, int16_t *x, int16_t *y, int16_t *z);
 
 #endif /*FSM_H*/

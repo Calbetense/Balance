@@ -1,6 +1,6 @@
 #include "FSM.h"
 
-/* Tres estados
+/* Three states
 :: Read     Reads the MPU value
 :: Write    Writes  on the motor by PWM
 :: Wait     Waits until 2ms to have a pseudo sample
@@ -22,9 +22,8 @@ void off(int64_t before){
 }
 
 
-
 //FSM
-void fire(state_t state, int64_t before){
+void fire(state_t state, int64_t before, int16_t *x, int16_t *y, int16_t *z){
   // State 1 
   switch (state)
   {
@@ -41,8 +40,19 @@ void fire(state_t state, int64_t before){
       state = LED_ON;
     }
     break;
-
-
+      case READ:
+      readMPU(x, y, z);
+    break;
+  // State 2
+  case WRITE:
+    //Calculate error
+    //Transform into PWM duty cicle
+    //Protections of limits
+    //Write PWM
+    break;
+  case WAIT:
+    //Waits until 2ms
+    break;
 
   default:
     state = LED_OFF;
